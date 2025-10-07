@@ -26,7 +26,7 @@ export default async function handler(req, res) {
       });
     }
 
-    const text = `📌 Новая заявка с сайта:\n\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n✂️ Услуга: ${service}\n💬 Сообщение: ${message || 'Без дополнительных пожеланий'}\n\n🌐 Источник: Сайт Портфолио`;
+    const text = `📌 Новая заявка с сайта:\n\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n✂️ Услуга: ${service}\n💬 Сообщение: ${message || 'Без дополнительных пожеланий'}\n\n🌐 Источник: Основной, реклама.`;
 
     // Отправляем в Telegram
     const telegramResponse = await fetch('https://api.telegram.org/bot7937469020:AAHk33stXSsPwtgXvLqNFN5JQwwAEYIAuLI/sendMessage', {
