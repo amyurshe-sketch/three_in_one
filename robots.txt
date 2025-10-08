@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://three-in-one-beta.vercel.app/sitemap.xml
