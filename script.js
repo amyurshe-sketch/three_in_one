@@ -385,3 +385,34 @@ document.addEventListener('keydown', function(e) {
         app.hideModal();
     }
 });
+// Simple modal close fix
+document.addEventListener('click', function(e) {
+    // Close when clicking X
+    if (e.target.id === 'closeModal') {
+        document.getElementById('successModal').classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+    
+    // Close when clicking close button
+    if (e.target.id === 'modalCloseBtn') {
+        document.getElementById('successModal').classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+    
+    // Close when clicking outside modal
+    if (e.target.id === 'successModal') {
+        document.getElementById('successModal').classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+});
+
+// Close with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const modal = document.getElementById('successModal');
+        if (modal && modal.classList.contains('active')) {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    }
+});
