@@ -1,5 +1,11 @@
 User-agent: *
 Allow: /
-Disallow: /api/
 
+# Блокируем служебные пути
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+
+# Указываем правильный sitemap
 Sitemap: https://three-in-one-beta.vercel.app/sitemap.xml
