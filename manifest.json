@@ -1,0 +1,23 @@
+{
+    "name": "Studio NN - Веб-разработка",
+    "short_name": "Studio NN",
+    "description": "Студия веб-разработки и дизайна. Создание современных сайтов, UI/UX дизайн, адаптивная верстка.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#F8F9FA",
+    "theme_color": "#4361EE",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/image/image_7.jpeg",
+            "sizes": "192x192",
+            "type": "image/jpeg"
+        },
+        {
+            "src": "/image/image_7.jpeg",
+            "sizes": "512x512",
+            "type": "image/jpeg"
+        }
+    ],
+    "categories": ["business", "development", "design"]
+}
