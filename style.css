@@ -1,0 +1,632 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+:root {
+    /* Светлая тема (яркая) */
+    --primary: #4361EE;
+    --secondary: #3A0CA3;
+    --accent: #F72585;
+    --dark: #1A1A2E;
+    --light: #FFFFFF;
+    --bg-light: #F8F9FA;
+    --text-light: #2D3748;
+    --text-muted-light: #718096;
+    --glass-light: rgba(255, 255, 255, 0.15);
+    --glass-border-light: rgba(255, 255, 255, 0.25);
+    --shadow-light: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+
+    /* Темная тема */
+    --bg-dark: #0F0F1B;
+    --text-dark: #E2E8F0;
+    --text-muted-dark: #A0AEC0;
+    --glass-dark: rgba(255, 255, 255, 0.05);
+    --glass-border-dark: rgba(255, 255, 255, 0.1);
+    --shadow-dark: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Применение темы */
+.theme-light {
+    --bg: var(--bg-light);
+    --text: var(--text-light);
+    --text-muted: var(--text-muted-light);
+    --glass: var(--glass-light);
+    --glass-border: var(--glass-border-light);
+    --shadow: var(--shadow-light);
+}
+
+.theme-dark {
+    --bg: var(--bg-dark);
+    --text: var(--text-dark);
+    --text-muted: var(--text-muted-dark);
+    --glass: var(--glass-dark);
+    --glass-border: var(--glass-border-dark);
+    --shadow: var(--shadow-dark);
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    /* --- КРИТИЧНОЕ ИСПРАВЛЕНИЕ: ПРЕДОТВРАЩАЕМ ГОРИЗОНТАЛЬНЫЙ СКРОЛЛ --- */
+    overflow-x: hidden !important; 
+    /* --------------------------------------------------------------------- */
+}
+
+/* Светлая тема — мягкий светлый фон с легким градиентом и паттерном */
+body.theme-light {
+    background: 
+        linear-gradient(120deg, #f6f7fb 60%, #e9eaf3 100%),
+        repeating-linear-gradient(
+            135deg,
+            #f6f7fb,
+            #f6f7fb 40px,
+            #ececf6 40px,
+            #ececf6 80px
+        );
+    color: #232323;
+    background-blend-mode: lighten;
+}
+
+/* Темная тема — глубокий фон с мягким градиентом и легким паттерном точек */
+body.theme-dark {
+    background:
+        radial-gradient(circle at 70% 30%, #23272f 60%, #353a45 100%),
+        repeating-radial-gradient(
+            circle at 20% 80%,
+            rgba(67, 97, 238, 0.06) 0px,
+            rgba(67, 97, 238, 0.06) 2px,
+            transparent 2px,
+            transparent 40px
+        );
+    color: #f1f1f1;
+    background-blend-mode: lighten;
+}
+
+/* Glassmorphism эффекты */
+.glass {
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+}
+
+.glass-dark {
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+}
+
+body.theme-light .glass,
+header.glass-dark,
+footer.glass-dark {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(8px);
+}
+
+body.theme-dark .glass,
+body.theme-dark header.glass-dark,
+body.theme-dark footer.glass-dark {
+    background: rgba(40, 44, 52, 0.85);
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 1s ease-out;
+}
+
+.animate-float {
+    animation: float 5s ease-in-out infinite;
+}
+
+.animate-pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Flexbox & Grid */
+.flex {
+    display: flex;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.grid {
+    display: grid;
+}
+
+.grid-auto {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Общие стили */
+section {
+    padding: 5rem 2rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 1rem;
+    overflow-x: hidden; /* Дополнительная защита от горизонтального скролла внутри контейнеров */
+}
+
+.text-center {
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 15px rgba(67, 97, 238, 0.4);
+}
+
+.btn-primary:hover {
+    background: var(--secondary);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(67, 97, 238, 0.6);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 2px solid var(--glass-border);
+}
+
+.btn-outline:hover {
+    background: var(--glass);
+    transform: translateY(-3px);
+}
+
+/* --- Улучшение видимости полоски под пунктами меню --- */
+body.theme-light .nav-links a::after {
+    background: var(--primary);
+    opacity: 0.7;
+}
+
+/* --- Улучшение видимости outline-кнопки на светлой теме --- */
+body.theme-light .btn-outline {
+    border: 2px solid var(--primary);
+    color: var(--primary);
+}
+
+body.theme-light .btn-outline:hover {
+    background: rgba(67, 97, 238, 0.08);
+    color: var(--primary);
+    border-color: var(--secondary);
+}
+
+/* ======================================= */
+/* СТИЛИ ДЛЯ КНОПОК ТЕМЫ/ЯЗЫКА ВНУТРИ NAV */
+/* ======================================= */
+.theme-btn, .lang-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text);
+    flex-shrink: 0;
+}
+
+.theme-btn:hover, .lang-btn:hover {
+    transform: scale(1.1);
+    background: var(--primary);
+    color: white;
+}
+/* ======================================= */
+/* КОНЕЦ БЛОКА CONTROLS */
+/* ======================================= */
+
+/* Header - ИСПРАВЛЕННАЯ ВЕРСИЯ */
+header {
+    padding: 1rem 1rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    max-width: 100%;
+}
+
+/* ИСПРАВЛЕНО: УБРАНЫ ОГРАНИЧЕНИЯ ШИРИНЫ И ОБРЕЗКА */
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    white-space: nowrap;
+    /* max-width, overflow: hidden, text-overflow: ellipsis - УДАЛЕНЫ */
+    min-width: 140px; /* Минимальная ширина для предотвращения сжатия */
+}
+
+.logo.handwrite {
+    font-family: 'Rock Salt', cursive;
+    font-size: 1.6rem;
+    letter-spacing: 0.04em;
+    color: var(--primary, #4361ee);
+    text-shadow: 0 2px 8px rgba(67, 97, 238, 0.08);
+    font-weight: 400;
+    user-select: none;
+    transition: color 0.2s;
+    /* max-width - УДАЛЕН */
+}
+
+header .logo.handwrite,
+footer .logo.handwrite {
+    margin-bottom: 0.2em;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    /* Чтобы nav-links занимали центральную часть на десктопе */
+    flex-grow: 1; 
+    justify-content: center;
+}
+
+.nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+    white-space: nowrap;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.menu-toggle {
+    /* Скрываем кнопку меню полностью */
+    display: none; 
+}
+
+/* Mobile Menu - Стили остались, но не используются, так как menu-toggle удален */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--bg);
+    z-index: 999;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.mobile-menu.active {
+    display: flex;
+}
+
+.mobile-menu .nav-links {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+}
+
+.mobile-menu .nav-links a {
+    font-size: 1.5rem;
+}
+
+.close-menu {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+}
+
+/* Hero Section */
+/* ... */
+
+/* ==================== */
+/* РАСШИРЕННАЯ АДАПТИВНОСТЬ */
+/* ==================== */
+
+/* Большие мониторы (1440px+) */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1400px;
+    }
+
+    .hero h1 {
+        font-size: 4rem;
+    }
+
+    section {
+        padding: 6rem 2rem;
+    }
+}
+
+/* Ноутбуки (1200px - 1439px) */
+@media (max-width: 1200px) {
+    .hero h1 {
+        font-size: 3.2rem;
+    }
+
+    .hero-image {
+        width: 350px;
+        height: 350px;
+        right: 5%;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
+}
+
+/* Планшеты горизонтально (992px - 1199px) */
+@media (max-width: 992px) {
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+
+    .hero-image {
+        width: 300px;
+        height: 300px;
+    }
+
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+/* Планшеты вертикально и Телефоны (768px и ниже) */
+@media (max-width: 768px) {
+    /* Скрываем навигационные ссылки */
+    .nav-links {
+        display: none;
+    }
+
+    /* Убираем отображение кнопки меню, так как она удалена из HTML, но на всякий случай */
+    .menu-toggle {
+        display: none !important;
+    }
+    
+    /* Настраиваем шапку: лого слева, кнопки справа */
+    .navbar {
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .theme-btn, .lang-btn {
+        width: 40px !important;
+        height: 40px !important;
+        /* Оптимизация порядка на мобильном */
+        order: 3; 
+    }
+    
+    .lang-btn {
+        order: 2;
+    }
+
+    .logo {
+        /* Логотип занимает основное место */
+        flex-grow: 1;
+        order: 1;
+        text-align: left;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 100px;
+        padding-bottom: 3rem;
+    }
+}
+
+/* Средние телефоны (576px - 767px) */
+@media (max-width: 576px) {
+    /* Коррекция размера кнопок */
+    .theme-btn, .lang-btn {
+        width: 38px !important;
+        height: 38px !important;
+        font-size: 1rem;
+    }
+}
+
+/* Маленькие телефоны (до 480px) */
+@media (max-width: 480px) {
+    /* Коррекция размера кнопок */
+    .theme-btn, .lang-btn {
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 0.9rem;
+    }
+}
+
+/* Очень маленькие телефоны (до 360px) */
+@media (max-width: 360px) {
+    /* Коррекция размера кнопок */
+    .theme-btn, .lang-btn {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 0.8rem;
+    }
+}
+
+/* Ландшафтная ориентация телефонов (меньше 800px по ширине и по высоте) */
+@media (max-width: 800px) and (max-height: 500px) and (orientation: landscape) {
+    header {
+        padding: 0.5rem 1rem;
+    }
+
+    /* В ландшафте - одинаковый размер */
+    .theme-btn, .lang-btn {
+        width: 36px !important;
+        height: 36px !important;
+    }
+}
+
+/* ... остальные стили (Hover, Reduced Motion, Typography) ... */
+
+/* Поддержка касаний */
+@media (hover: none) and (pointer: coarse) {
+    .service-card:hover {
+        transform: none;
+    }
+
+    .portfolio-item:hover {
+        transform: none;
+    }
+
+    .portfolio-item:hover img {
+        transform: none;
+    }
+
+    .portfolio-overlay {
+        transform: translateY(0);
+        background: linear-gradient(to top, 
+            rgba(0, 0, 0, 0.9) 0%, 
+            rgba(0, 0, 0, 0.7) 50%, 
+            rgba(0, 0, 0, 0.5) 100%);
+    }
+
+    .btn:hover, .social-link:hover {
+        transform: none;
+    }
+}
+
+/* Поддержка reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Языковые версии */
+.lang-ru { display: block; }
+.lang-en { display: none; }
+
+body:lang(en) .lang-ru { display: none; }
+body:lang(en) .lang-en { display: block; }
+
+/* Импорт современного шрифта Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
+
+/* Сглаживание шрифтов для мягкости */
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Заголовки — чуть мягче и легче */
+h1, h2, h3, h4, h5, h6, .section-title {
+    font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.15;
+}
+
+/* Текстовые элементы — мягкий цвет и высота строки */
+body, p, .section-subtitle, .form-control, .btn, .portfolio-overlay, .service-desc {
+    font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--text);
+}
+
+/* Кнопки — чуть крупнее и мягче */
+.btn, .btn-primary, .btn-open-site {
+    font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    font-size: 1.08rem;
+}
